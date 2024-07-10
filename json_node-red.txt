@@ -1,0 +1,211 @@
+[
+    {
+        "id": "c73516050e9670c4",
+        "type": "tab",
+        "label": "Arduino Área de Teste",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8c0759f2b73c30ef",
+        "type": "serial in",
+        "z": "c73516050e9670c4",
+        "name": "",
+        "serial": "632ce51bae434d89",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "78c9b7023caae7d3"
+            ]
+        ]
+    },
+    {
+        "id": "78c9b7023caae7d3",
+        "type": "json",
+        "z": "c73516050e9670c4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "7fe478bfb80dde25",
+                "275c1139f6f64d6e"
+            ]
+        ]
+    },
+    {
+        "id": "7fe478bfb80dde25",
+        "type": "function",
+        "z": "c73516050e9670c4",
+        "name": "",
+        "func": "var value=JSON.parse(JSON.stringify(msg.payload));\nvalue=msg;\nvar sensor1 = msg.payload.Pac;\nmsg.payload = [sensor1];\nmsg.topic = 'INSERT INTO dados_sensores(Dados) VALUES (?);';\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "4aebfc352c4acb8b"
+            ]
+        ]
+    },
+    {
+        "id": "4aebfc352c4acb8b",
+        "type": "mysql",
+        "z": "c73516050e9670c4",
+        "mydb": "a8c399d7db9657e5",
+        "name": "",
+        "x": 610,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "267d862cfcb3ab35",
+        "type": "ui_button",
+        "z": "c73516050e9670c4",
+        "name": "",
+        "group": "026a4b36e091062e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Limpar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 690,
+        "y": 80,
+        "wires": [
+            [
+                "923e3d71fc9abb9f"
+            ]
+        ]
+    },
+    {
+        "id": "275c1139f6f64d6e",
+        "type": "function",
+        "z": "c73516050e9670c4",
+        "name": "dados_dashboard",
+        "func": "var b = JSON.parse(JSON.stringify(msg.payload)); \nb=msg;\nmsg.payload=msg.payload.Pac;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "923e3d71fc9abb9f"
+            ]
+        ]
+    },
+    {
+        "id": "923e3d71fc9abb9f",
+        "type": "ui_chart",
+        "z": "c73516050e9670c4",
+        "name": "",
+        "group": "026a4b36e091062e",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "label": "Dashboard - SENSOR",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "280",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 700,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "632ce51bae434d89",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "COM6",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "a8c399d7db9657e5",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "arduino_db",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "026a4b36e091062e",
+        "type": "ui_group",
+        "name": "Dashboard_arduino",
+        "tab": "6c698b0f61df3f76",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "6c698b0f61df3f76",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
