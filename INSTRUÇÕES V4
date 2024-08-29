@@ -1,0 +1,44 @@
+sudo apt update
+sudo apt upgrade
+sudo reboot
+sudo shutdown -r now
+
+cd IOTstack/
+./menu.sh
+docker-compose ps
+
+/usr/bin/influxd 
+/etc/influxdb/influxdb.conf
+influxdb = <ip>:8086
+node-red = <ip>:1880
+grafana-server = <ip>:3000
+portainer = <ip>:9000
+
+ip tailscale: 100.95.117.67
+
+
+# Bind address to use for the RPC service for backup and restore.
+# bind-address = "127.0.0.1:8088"
+
+
+porta 22 = ssh
+192.168.3.29
+
+login grafana 
+pedrosant1905@gmail.com	|| jp
+582700Jp
+
+login portainer
+jp
+1234567891011
+
+comandos para acessar o influxdb pelo putty
+
+docker exec -it influxdb influx
+USE sensor_data
+show measurements
+select * from sensor_data
+quit
+
+comando para apagar os dados de uma tabela no influxdb pelo putty
+DROP MEASUREMENT sensor_data
